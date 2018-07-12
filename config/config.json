@@ -1,0 +1,46 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "tcm",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+
+    "connectionString": "mongodb://localhost:27017/todoapp",
+    "apiUrl": "http://localhost:4000",
+    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "refreshTokenSecret":"REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "tokenLife": 43200,
+    "refreshTokenLife": 43200
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+
+    "connectionString": "mongodb://localhost:27017/todoapp",
+    "apiUrl": "http://localhost:4000",
+    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "refreshTokenSecret":"REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "tokenLife": 43200,
+    "refreshTokenLife": 43200
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    
+    "connectionString": "mongodb://localhost:27017/todoapp",
+    "apiUrl": "http://localhost:4000",
+    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "refreshTokenSecret":"REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "tokenLife": 43200,
+    "refreshTokenLife": 43200
+  }
+ 
+
+}
