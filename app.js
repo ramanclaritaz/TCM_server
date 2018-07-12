@@ -33,7 +33,7 @@ app.use(expressJwt({
       }
       return null;
   }
-}).unless({ path: ['/api/authenticate', '/api/register','/api/forgotPassword'] }));
+}).unless({ path: ['/api/authenticate', '/api/register','/api/password/forgot'] }));
 
 app.use(function (err, req, res, next) {
   console.log("err");    

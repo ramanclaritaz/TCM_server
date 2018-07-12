@@ -48,7 +48,6 @@ exports.create = async function (params) {
 exports.updateForgotPassword = async function (email) {
 
     try {
-
         // search for attributes
         var user = User.findOne({where: {email: email}}).then(res => {            
            

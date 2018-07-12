@@ -82,7 +82,18 @@ exports.register = async function (req, res, next) {
 exports.forgotPassword = async function (req, res, next) {
 
     try {
-        var user = await _commonService.getUser(req);
+        // var user = await _commonService.getUser(req);
+        var email = req.body.email;
+
+        var user = await _service.authenticate(email);
+
+        if (!email) {
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "Email required"
+            });
+        }
 
         if (!user) {
             return res.status(400).json({
