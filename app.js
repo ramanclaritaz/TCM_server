@@ -9,9 +9,8 @@ var expressJwt = require('express-jwt');
 
 var db = require('./shared/config')
 var config = db.config;
-console.log("CONFIG");
-console.log(config);
-
+// console.log("CONFIG");
+// console.log(config);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

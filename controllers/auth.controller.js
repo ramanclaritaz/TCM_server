@@ -3,14 +3,18 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var _commonService = require('../services/common.service')
 var db = require('../shared/config')
+
+var validateErr = require('../utils/validateError');
+
 var config = db.config;
+
 
 _this = this
 
 exports.authenticate = async function (req, res, next) {
     try {
 
-        var user = await _service.authenticate(req.body.email);
+        var user = await _service.authenticate(req.body.username);
         
         if (!user) {
             return res.status(400).json({
@@ -39,8 +43,8 @@ exports.authenticate = async function (req, res, next) {
                     expiresIn: config.refreshTokenLife
                 })
 
-                return res.status(201).json({
-                    status: 201,
+                return res.status(200).json({
+                    status: 200,
                     success: true,
                     token: token,
                     refreshToken: refreshToken,
@@ -49,10 +53,11 @@ exports.authenticate = async function (req, res, next) {
             }
         }
     } catch (e) {
+        var err = await validateErr.validateError(e);
         return res.status(400).json({
             status: 400,
             success: false,
-            message: e.message
+            message: err
         });
 
     }
@@ -70,10 +75,12 @@ exports.register = async function (req, res, next) {
             message: "Succesfully Created "
         })
     } catch (e) {
+        var err = await validateErr.validateError(e);
+        
         return res.status(400).json({
             status: 400,
             success: false,
-            message: "Creation was Unsuccesfull " + e
+            message: err
         })
     }
 }
@@ -83,15 +90,15 @@ exports.forgotPassword = async function (req, res, next) {
 
     try {
         // var user = await _commonService.getUser(req);
-        var email = req.body.email;
+        var username = req.body.username;
 
-        var user = await _service.authenticate(email);
+        var user = await _service.authenticate(username);
 
-        if (!email) {
+        if (!username) {
             return res.status(400).json({
                 status: 400,
                 success: false,
-                message: "Email required"
+                message: "Username required"
             });
         }
 
@@ -102,10 +109,10 @@ exports.forgotPassword = async function (req, res, next) {
                 message: "Authentication Failed. User not Found"
             });
         } else {
-            var record = await _service.updateForgotPassword(email);
+            var record = await _service.updateForgotPassword(username);
 
-            return res.status(201).json({
-                status: 201,
+            return res.status(202).json({
+                status : 202,
                 success: true,
                 message: "We have sent a new password to your registered email"
             })
@@ -113,10 +120,11 @@ exports.forgotPassword = async function (req, res, next) {
         }
 
     } catch (e) {
+        var err = await validateErr.validateError(e);
         return res.status(400).json({
             status: 400,
             success: false,
-            message: e.message
+            message: err
         });
 
     }
@@ -153,8 +161,8 @@ exports.changePassword = async function (req, res, next) {
         } else {
             var record = await _service.updatePassword(user.id, newPassword);
 
-            return res.status(201).json({
-                status: 201,
+            return res.status(202).json({
+                status: 202,
                 success: true,
                 message: "Your new password has been changed successfully!"
             })
@@ -162,10 +170,11 @@ exports.changePassword = async function (req, res, next) {
         }
 
     } catch (e) {
+        var err = await validateErr.validateError(e);        
         return res.status(400).json({
             status: 400,
             success: false,
-            message: e.message
+            message: err
         });
 
     }

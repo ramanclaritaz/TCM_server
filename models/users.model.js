@@ -11,12 +11,26 @@ var User = sequelize.define('users', {
     },
     name: {
         type: Sequelize.STRING(255),
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: {
+                args: 3,
+                msg: "Name must be atleast 3 characters in length"
+            }
+        }
     },
     email: {
         type: Sequelize.STRING(255),
         allowNull: false,
-        unique: true
+        unique: {
+            args: true,
+            msg: 'Email address already in use!'
+        },
+         validate: {
+                isEmail: {
+                    msg: "Email address must be valid"
+                }
+            }
     },
     password: {
         type: Sequelize.STRING(255),
@@ -28,7 +42,11 @@ var User = sequelize.define('users', {
     },
     mobile: {
         type: Sequelize.STRING(15),
-        allowNull: true
+        allowNull: true,
+        unique: {
+            args: true,
+            msg: 'Mobile number already in use!'
+        },
     },
     avatar: {
         type: Sequelize.STRING(255),

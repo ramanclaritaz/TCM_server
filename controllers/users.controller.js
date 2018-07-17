@@ -1,4 +1,5 @@
 var _service = require('../services/users.service')
+var validateErr = require('../utils/validateError');
 
 _this = this
 
@@ -18,10 +19,11 @@ exports.get = async function (req, res, next) {
         });
 
     } catch (e) {
+        var err = await validateErr.validateError(e);
         return res.status(400).json({
             status: 400,
             success: false,
-            message: e.message
+            message: err
         });
 
     }
@@ -43,10 +45,11 @@ exports.create = async function (req, res, next) {
             message: "Succesfully Created "
         })
     } catch (e) {
+        var err = await validateErr.validateError(e);
         return res.status(400).json({
             status: 400,
             success: false,
-            message: "Creation was Unsuccesfull"
+            message: err
         })
     }
 }

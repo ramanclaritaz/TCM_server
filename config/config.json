@@ -10,7 +10,7 @@
     "apiUrl": "http://localhost:4000",
     "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
     "refreshTokenSecret":"REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
-    "tokenLife": 43200,
+    "tokenLife": 60,
     "refreshTokenLife": 43200
   },
   "test": {
