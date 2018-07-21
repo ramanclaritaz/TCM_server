@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "mysql2": "^1.5.3",
+    "nodemailer": "^4.6.7",
     "nodemon": "^1.17.4",
     "rootpath": "^0.1.2",
     "sequelize": "^4.38.0",

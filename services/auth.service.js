@@ -1,5 +1,6 @@
 var User = require('../models/users.model')
 var bcrypt = require('bcryptjs');
+var nodemailer = require("nodemailer");
 
 const TokenGenerator = require('uuid-token-generator');
 const tokgen2 = new TokenGenerator(256, TokenGenerator.BASE62);
@@ -75,6 +76,32 @@ exports.updateForgotPassword = async function (username) {
             res.password = bcrypt.hashSync("123456", 10);
             res.resetPasswordToken = tokgen2.generate();
             res.resetPasswordExpires = Date.now() + 3600000;
+
+            var smtpTransport = nodemailer.createTransport("SMTP",{
+                service: "Gmail",
+                 auth: {
+                    user: "kannan.kalai58@gmail.com",
+                    pass: "kuttykalai@90"
+                }
+            });
+
+            var mailOptions = {
+                    from: "kannan.kalai58@gmail.com", // sender address
+                    to: "kalaivanan.s@claritaz.com", // list of receivers
+                    subject: "Welcome to TCM", // Subject line
+                    text: "Congrats", // plaintext body
+                    html: "<b>Welcome to TCM</b>" // html body
+            }
+            smtpTransport.sendMail(mailOptions, function(error, response){
+                if(error){
+                    console.log(error);
+                }else{
+                    console.log("Message sent: " + response.message);
+                }
+
+    // if you don't want to use this transport object anymore, uncomment following line
+    //smtpTransport.close(); // shut down the connection pool, no more messages
+            });
 
             res.save();
 
